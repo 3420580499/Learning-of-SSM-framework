@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.bjpowernode</groupId>
+  <artifactId>02-web_maven</artifactId>
+  <version>1.0</version>
+  <!--web项目默认是war文件-->
+  <packaging>war</packaging>
+
+  <name>02-web_maven</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <!--maven在构建项目时使用的编码,避免中文乱码-->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!--编译代码使用的jdk的版本-->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <!--运行程序使用的jdk的版本-->
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <!--自定义全局变量,表示版本号-->
+    <junit.version>4.11</junit.version>
+  </properties>
+
+  <dependencies>
+    <!--默认加入的单元测试的依赖-->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <!--<version>4.11</version> 可以用以下的方式替代-->
+      <version>${junit.version}</version>
+      <!--依赖的范围(此处是在测试代码的时候有效(参与))-->
+      <!--默认为compile在各个阶段都有效-->
+      <scope>test</scope>
+    </dependency>
+    <!--加入servlet依赖(servlet的jar)-->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <!--提供者:在执行程序与测试程序时有效-->
+      <scope>provided</scope>
+    </dependency>
+    <!--jsp的依赖(jsp相关的jar加入进来)-->
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>jsp-api</artifactId>
+      <version>2.1</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>web_maven</finalName>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <!--maven会自动将src/main/resource目录下的配置文件拷贝到target的classes目录下(这个不用自己通知maven)-->
+    <!--(以下是通知maven)设置将src/main/java目录下的properties,.xml文件也会拷贝到target的classes目录下-->
+    <resources>
+        <resource>
+          <directory>src/main/java</directory><!--所在的目录-->
+          <includes><!--包括目录下的.properties,.xml 文件都会扫描到-->
+            <include>**/*.properties</include>
+            <include>**/*.xml</include>
+          </includes>
+          <!--filtering 选项 false不启用过滤器，*.property 已经起到过滤的作用了 -->
+          <filtering>false</filtering>
+        </resource>
+    </resources>
+  </build>
+</project>

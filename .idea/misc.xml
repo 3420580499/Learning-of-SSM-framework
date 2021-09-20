@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/02-web_maven" />
+    <file type="web" url="file://$PROJECT_DIR$/06-java-hello-spring" />
+    <file type="web" url="file://$PROJECT_DIR$/15-spring-webapp" />
+    <file type="web" url="file://$PROJECT_DIR$/ch01-hello-springmvc" />
+    <file type="web" url="file://$PROJECT_DIR$/ch02-springmvc-requestmapping" />
+    <file type="web" url="file://$PROJECT_DIR$/ch03-springmvc-return" />
+    <file type="web" url="file://$PROJECT_DIR$/ch04-SSM整合" />
+    <file type="web" url="file://$PROJECT_DIR$/ch05-springmvc-Exception" />
+    <file type="web" url="file://$PROJECT_DIR$/ch06-springmvc-Interceptor" />
+    <file type="web" url="file://$PROJECT_DIR$/在线考试管理(ssm)" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/javase_maven/pom.xml" />
+        <option value="$PROJECT_DIR$/web_maven/pom.xml" />
+        <option value="$PROJECT_DIR$/java-maven-mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/java-proxy-mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/java-dynamic-sql/pom.xml" />
+        <option value="$PROJECT_DIR$/java-hello-spring/pom.xml" />
+        <option value="$PROJECT_DIR$/java-di-xml/pom.xml" />
+        <option value="$PROJECT_DIR$/java-spring-ioctest/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-di-anno/pom.xml" />
+        <option value="$PROJECT_DIR$/review/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-aop-aspectj/pom.xml" />
+        <option value="$PROJECT_DIR$/spring整合mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-mybatis-transaction/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-mybatis-open-transaction/pom.xml" />
+        <option value="$PROJECT_DIR$/aspectj-mybatis-open-transaction/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-webapp/pom.xml" />
+        <option value="$PROJECT_DIR$/ch01-hello-springmvc/pom.xml" />
+        <option value="$PROJECT_DIR$/ch02-springmvc-requestmapping/pom.xml" />
+        <option value="$PROJECT_DIR$/ch03-springmvc-return/pom.xml" />
+        <option value="$PROJECT_DIR$/ch04-SSM整合/pom.xml" />
+        <option value="$PROJECT_DIR$/ch05-springmvc-Exception/pom.xml" />
+        <option value="$PROJECT_DIR$/ch06-springmvc-Interceptor/pom.xml" />
+        <option value="$PROJECT_DIR$/在线烤熟管理系统(ssm)/pom.xml" />
+        <option value="$PROJECT_DIR$/在线考试管理(ssm)/pom.xml" />
+        <option value="$PROJECT_DIR$/JDBC实现增删改查/pom.xml" />
+        <option value="$PROJECT_DIR$/JDBC实现数据库增删改查/pom.xml" />
+        <option value="$PROJECT_DIR$/01-javase_maven/pom.xml" />
+        <option value="$PROJECT_DIR$/02-web_maven/pom.xml" />
+        <option value="$PROJECT_DIR$/03-java-maven-mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/04-java-proxy-mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/05-java-dynamic-sql/pom.xml" />
+        <option value="$PROJECT_DIR$/06-java-hello-spring/pom.xml" />
+        <option value="$PROJECT_DIR$/07-java-di-xml/pom.xml" />
+        <option value="$PROJECT_DIR$/08-java-spring-ioctest/pom.xml" />
+        <option value="$PROJECT_DIR$/09-spring-di-anno/pom.xml" />
+        <option value="$PROJECT_DIR$/10-spring-aop-aspectj/pom.xml" />
+        <option value="$PROJECT_DIR$/11-spring整合mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/12-spring-mybatis-transaction/pom.xml" />
+        <option value="$PROJECT_DIR$/13-spring-mybatis-open-transaction/pom.xml" />
+        <option value="$PROJECT_DIR$/14-aspectj-mybatis-open-transaction/pom.xml" />
+        <option value="$PROJECT_DIR$/15-spring-webapp/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/ch04-SSM整合/在线考试管理系统(ssm)/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

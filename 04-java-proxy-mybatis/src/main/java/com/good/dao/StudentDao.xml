@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.good.dao.StudentDao">
+    <!--
+      select:表示查询操作.
+      id:你要执行的SQL语法的唯一标识,mybatis会使用这个id的值来找到要执行的SQL语句
+         可以自定义,但要求你使用接口中的方法名称.
+      resultType:表示结果类型的,是SQL语句执行后得到的ResultSet,遍厉这个ResultSet得到java对象的类型
+                 写的是类型的全限定名称
+    -->
+    <select id="selectStudents" resultType="com.good.entity.Student">
+        select * from student order by id
+    </select>
+    <!--插入操作-->
+    <insert id="insertStudent" >
+        insert into student values (#{id},#{name},#{email},#{age})
+    </insert>
+    <!--返回Map
+       1)列名是map的key,列值是map的value
+       2)只能最多返回一行数据,多余一行就报错
+    -->
+    <select id="returnMap" resultType="java.util.HashMap">
+        select id,name from student where id=#{id}
+    </select>
+    <!--使用resultMap
+        1)先定义resultMap
+        2)在select标签,使用resultMap来引用1中定义的
+    -->
+    <!--定义resultMap
+        id:自定义名称,表示你定义的这个resultMap
+        type:java类型的全限定名称
+    -->
+    <resultMap id="studentMap" type="com.good.entity.Student" >
+        <!--列名和java属性的关系-->
+        <!--主键列使用id标签
+             column:列名
+             property:java类型的属性名
+        -->
+        <id column="id" property="id"/>
+        <result column="name" property="name" />
+        <result column="name" property="email" />
+        <result column="age" property="age" />
+    </resultMap>
+    <select id="selectAllStudent" resultMap="studentMap">
+           select * from student
+    </select>
+
+
+
+
+
+
+<!--数据库列名与属性名不一致时-->
+<!--直接查询(当数据库列名与属性名不一致时)(使用resultType:同名的列值赋值给同名的属性)-->
+    <!--
+    <select id="selectOtherStudent" resultType="com.good.entity.OtherStudent">
+        select * from student
+    </select>
+    -->
+<!--第一种解决方案(使用resultMap)(推荐使用)-->
+    <resultMap id="otherStudentMap" type="com.good.entity.OtherStudent" >
+        <id column="id" property="stuid"/>
+        <result column="name" property="stuname" />
+        <result column="name" property="stuemail" />
+        <result column="age" property="stuage" />
+    </resultMap>
+    <select id="selectOtherStudent" resultMap="otherStudentMap">
+        select * from student
+    </select>
+<!--第二种解决方案(使用resultMap:同名的列值赋值给同名的属性)(修改数据库列的别名)-->
+    <select id="selectOtherStudentTwo" resultType="com.good.entity.OtherStudent">
+        select id as stuid,name as stuname,email as stuemail,age as stuage  from student
+    </select>
+
+
+
+
+
+<!--实现模糊查询-->
+    <!--第一种模糊查询(在java代码中指定like的内容)-->
+    <select id="selectLikeStudent" resultType="com.good.entity.Student">
+        select * from student where name like #{name}
+    </select>
+    <!--第二种模糊查询(在mapper中拼接like)-->
+    <select id="selectLikeStudentTwo" resultType="com.good.entity.Student">
+        select * from student where name like  "_" #{name}
+    </select>
+
+</mapper>
+
+<!--
+    sql映射文件(SQL mapper):写SQL语句的,mybatis会执行这些SQL
+    1.指定约束文件
+      <!DOCTYPE mapper
+            PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+            "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+      mybatis-3-mapper.dtd 是约束文件的名称,扩展名是dtd的.
+    2.约束文件的作用: 限制和检查当前文件中出现的标签,属性必须符合mybatis的要求.
+
+    3.mapper 是当前文件的根标签,必须的.
+      namespace:叫做命名空间,唯一的值,可以是自定义的字符串.
+                要求你使用到接口的全限定名称.
+
+    4.在当前文件中,可以使用特定的标签,表示数据库的特定操作,
+      <select>:表示执行查询,select语句
+      <update>:表示更新数据库的操作,就是在<update>标签中写的是update SQL语句
+      <insert>:表示插入,放的是insert语句
+      <delete>:表示删除,执行的delete语句
+-->

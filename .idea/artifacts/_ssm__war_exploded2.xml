@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="在线烤熟管理系统(ssm):war exploded">
+    <output-path>$PROJECT_DIR$/在线烤熟管理系统(ssm)/target/在线烤熟管理系统(ssm)</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>在线烤熟管理系统(ssm)</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="在线考试管理(ssm)" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/在线考试管理(ssm)/target/在线烤熟管理系统(ssm)/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="在线考试管理(ssm)/web/Web" />
+    </root>
+  </artifact>
+</component>

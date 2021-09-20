@@ -1,0 +1,1 @@
+springmvc处理器方法返回值object,可以转为json输出到浏览器,响应Ajax的内部原理

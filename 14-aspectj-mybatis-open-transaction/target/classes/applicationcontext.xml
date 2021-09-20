@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+
+    <!--让spring知道jdbc.properties文件的位置-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+
+
+
+    <!--声明数据源DataSource,用来连接数据库-->
+    <!--阿里的连接池-->
+     <bean id="myDataSource" class="com.alibaba.druid.pool.DruidDataSource"
+           init-method="init" destroy-method="close">
+         <!--set注入给DruidDataSource提供数据库连接信息-->
+         <property name="url" value="${jdbc.url}"/><!--setUrl()-->
+         <property name="username" value="${jdbc.username}"/>
+         <property name="password" value="${jdbc.password}"/>
+         <property name="maxActive" value="${max}"/>
+     </bean>
+
+
+
+    <!--用来声明mybatis提供的SqlSessionFactoryBean类的,此类内部用来创建SqlSessionFactory-->
+    <!--来源于mybatis整合spring的jar包中-->
+     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+         <!--set注入,将数据库连接池赋给了dataSource属性-->
+         <property name="dataSource" ref="myDataSource"/>
+         <!--
+           mybatis主配置文件的位置
+           configLocation属性是Resource类型,用来读取配置文件
+           它的赋值使用value,指定文件的路径,使用classpath,表示文件的位置
+         -->
+         <property name="configLocation" value="classpath:mybatis.xml"/>
+     </bean>
+
+
+
+    <!--创建dao对象,使用SqlSession的getMapper(Student.class)
+        MapperScannerConfigurer:在内部调用getMapper()生成每一个dao接口的代理对象(如:此处会生成名为studentDao的对象)
+    -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定SqlSessionFactory对象的id-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--指定包名,包名是dao接口所在的包名
+            MapperScannerConfigurer会扫描这个包中的所有接口,把每个接口都执行
+            一次getMapper()方法,得到每一个接口的dao对象
+            创建好的dao对象放入到spring的容器中   (dao对象的默认名称是接口名的首字母小写:studentDao)
+        -->
+        <property name="basePackage" value="com.example.dao"/>
+    </bean>
+
+
+    <!--声明service-->
+    <bean id="goodsService" class="com.example.service.impl.BuyGoodsServiceImpl">
+        <property name="saleDao" ref="saleDao"/>
+        <property name="goodsDao" ref="goodsDao"/>
+    </bean>
+
+
+
+    <!--声明式事务处理:和源代码完全分离的-->
+    <!--声明事务管理器对象-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="myDataSource"/>
+    </bean>
+
+
+    <!--2.声明业务方法它的事务属性(隔离级别.传播行为,超时时间)
+          id:自定义名称,表示<tx:advice>和</tx:advice>之间的配置内容的
+          transaction-manager:事务管理器对象的id
+    -->
+    <tx:advice id="myAdvice" transaction-manager="transactionManager">
+        <!--tx:attributes:配置事务的属性-->
+        <tx:attributes>
+            <!--name:方法名称,1)完整的方法名称,不带有包和类
+                            2)方法可以使用通配符*表示任意字符
+                propagation:传播行为,枚举值
+                isolation:隔离级别
+                rollback-for你指定的异常类名,全限定名称
+            -->
+            <tx:method name="buy" propagation="REQUIRED" isolation="DEFAULT"
+                       rollback-for="com.example.exce.MyRunTimeException,java.lang.NullPointerException"/>
+
+            <!--使用通配符指定很多的方法-->
+            <tx:method name="add*" propagation="REQUIRES_NEW"/>
+            <tx:method name="remove*" propagation="REQUIRED"/>
+            <tx:method name="modify" propagation="REQUIRES_NEW"/>
+            <tx:method name="*" isolation="DEFAULT"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <!--配置切入点表达式:指定那些包中类,要使用事务
+            id:切入点表达式的名称,唯一值
+            expression:切入点表达式,指定那些类要使用事务,aspectj会创建代理对象
+
+            如:com.example.service
+        -->
+        <aop:pointcut id="servicePt" expression="execution(* *..service..*.*(..))"/>
+
+        <!--关联增强器:关联advice和pointcut
+            advice-ref:通知上面tx:advice哪里的配置
+            point-ref:切入点表达式的id
+        -->
+        <aop:advisor advice-ref="myAdvice" pointcut-ref="servicePt"/>
+    </aop:config>
+
+
+
+
+</beans>
