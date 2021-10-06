@@ -5,11 +5,13 @@ import com.github.pagehelper.PageHelper;
 import com.good.dao.StudentDao;
 import com.good.entity.Student;
 import com.good.utils.MybatisUtil;
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * @author 小白
@@ -85,14 +87,16 @@ public class TestMybatis {
       sqlSession.close();
    }
    @Test
-   public void testSelectAllStudent(){
-      PageHelper.startPage(2,4);
-      SqlSession sqlSession = MybatisUtil.getSqlSession();
-      StudentDao dao = sqlSession.getMapper(StudentDao.class);
-      List<Student> list  = dao.selectAllStudent();
-      list.forEach(student -> System.out.println(student));
-      sqlSession.close();
+   public void testSelectAllStudent() {
+      PageHelper.startPage(2, 4);
+      MybatisUtil.getSqlSession()
+              .getMapper(StudentDao.class)
+              .selectAllStudent()
+              .stream()
+              .map(Student::getName)
+              .forEach(System.out::println);
    }
+
 
 
 

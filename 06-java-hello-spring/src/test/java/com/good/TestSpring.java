@@ -45,7 +45,7 @@ public class TestSpring {
     @Test
     public void test03(){
         Object someService = (Object)new SomeServiceImpl();
-        SomeService impl=(SomeService)someService;
+        SomeServiceImpl impl = (SomeServiceImpl)someService;
         impl.doSome();
 
     }

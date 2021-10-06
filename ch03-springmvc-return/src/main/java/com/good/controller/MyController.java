@@ -127,6 +127,8 @@ public class MyController {
      *   如果没有(@ResponseBody)注解,该String返回的是视图(和前面的一样)
      * 默认使用的是"text/plain;charset=Iso-8859-1"作为contentType,导致中文乱码
      * 解决方案:给(@RequestMapping)加上属性produces定义contentType
+     * 过滤器中已经设置了response的响应格式，但是返回值是string类型时会
+     * 使用StringHttpMessageConverter这个类的对象去输出，这个类的对象默认使用的格式-8859-1来输出
      */
     @ResponseBody
     @RequestMapping(value = "/doo.do",produces = "text/plain;charset=utf-8")

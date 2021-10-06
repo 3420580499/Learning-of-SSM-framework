@@ -29,6 +29,12 @@
     })
 </script>
 <body>
+<%--
+  不加斜杆和加斜杆的区别:
+    1.加斜杆:访问地址变为:http://localhost:8080/other.do
+    2.不加斜杆:访问地址变为:http://localhost:8080/myweb/other.do(因为index.jsp的在myweb下,我们的访问路径就加上了myweb)
+
+--%>
    <%--<a  href="other.do">点击访问中央调度器</a>--%>
    <center>
        <%--此处不要写/other.do--%>

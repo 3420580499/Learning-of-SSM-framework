@@ -21,7 +21,7 @@ public class TestMybatis {
     //测试方法,测试功能
     @Test
     public void testSelect() {
-        /**
+        /*
          * 使用mybatis的动态代理机制,使用SqlSession.getMapper(dao接口)
          * getMapper能获取dao接口对应的实现类对象
          * (里面采用了反射机制)

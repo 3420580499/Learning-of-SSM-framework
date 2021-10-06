@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 //此处写了user,下面的路径之前就默认加上一个user
 //@RequestMapping("/user")
+//相当于你默认的路径为"/user/some.do"
 public class MyController {
     @RequestMapping(value = "/some.do")
     public ModelAndView dosome(){  //doget()--service请求处理

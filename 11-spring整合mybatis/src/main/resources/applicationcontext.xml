@@ -35,6 +35,8 @@
            configLocation属性是Resource类型,用来读取配置文件
            它的赋值使用value,指定文件的路径,使用classpath,表示文件的位置
          -->
+         //spring文件中要指定其他文件的位置要使用classpath
+
          <property name="configLocation" value="classpath:mybatis.xml"/>
      </bean>
 
